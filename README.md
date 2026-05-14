@@ -1,36 +1,86 @@
-INSTRUCTIONS:
-*Game will play as intended when running the exe and will not require extra steps. 
-However included is a link to a "answer key" google doc with screenshots in 
-the event that the tester is unable complete the game without assistance.
+# The Reunion 
 
-LINK TO ANSWER KEY:
-https://docs.google.com/document/d/1a1MK4QIwGZOvckUrP1hgLzlRmDAeJZEozfStLeu8d58/edit?usp=sharing
+A 2D top-down cozy murder mystery game built in Unity (C#) for CAP4053 – AI for Game Programming at the University of Central Florida (Spring 2025).
 
-LINK TO GITHUB REPO:
-https://github.com/amarqueztavera/CAP4053
+You've snuck away from a family reunion to investigate a murder. Explore the house, solve puzzles, and gather clues — but don't get caught.
 
-UNFIXED BUGS(KNOWN):
-*Note Jigsaw- Placing a puzzle piece in to the correct spot when an incorrect puzzle piece is already placed in that spot will not
- allow the player to retrieve the incorrect piece. The correct piece has already fixed in place on top of it. Must reset puzzle by exiting.
-*Color flow- Will allow you to complete it incorrectly by overlapping lines.
+---
 
-3RD PARTY ITEMS:
-*ChatGPT used for img file generation and scripting assistance
-*Youtube tutorials referenced:
-https://www.youtube.com/watch?v=IgBjJ-bexeo&list=PLBn3VIODcWouTWEnWSewuw02SofO-WG5t
-https://www.youtube.com/watch?v=KHZFpRL3Xzc
-*GitHub referenced:
-https://github.com/h8man/NavMeshPlus
-*Unity Asset Store:
-https://assetstore.unity.com/packages/2d/characters/city-life-pixel-art-characters-16x16-animated-urban-pack-307163
-https://assetstore.unity.com/packages/2d/characters/eb-character-customization-245368
-https://assetstore.unity.com/packages/2d/environments/free-pixel-food-113523
-https://assetstore.unity.com/packages/2d/environments/free-game-items-131764
-https://assetstore.unity.com/packages/2d/environments/house-interior-tileset-32x32-lite-307715
-https://assetstore.unity.com/packages/2d/environments/the-japan-collection-japanese-city-free-version-278915
-https://assetstore.unity.com/packages/2d/environments/pixel-art-padlock-pack-animated-271550
-https://assetstore.unity.com/packages/2d/gui/pixel-art-menu-package-5-sets-275304
-https://assetstore.unity.com/packages/tools/particles-effects/smart-lighting-2d-112535
-https://assetstore.unity.com/packages/2d/environments/the-japan-collection-japanese-school-interior-207769
-https://assetstore.unity.com/packages/audio/music/free-meditative-music-pack-264585?srsltid=AfmBOoqwLwB_IzGkW7cZIgkQv5XkqUL2sFJzwdW8_BR7nzObidbliqk3
-https://kinnly.itch.io/free-inventory-system-for-2d-games
+## Gameplay Overview
+
+The player moves through a multi-room map collecting evidence across three acts of increasing difficulty. Each act introduces harder puzzles and a faster-growing suspicion meter. Once all clues are gathered, the player must make a final accusation — choosing both the suspect and the murder weapon. A wrong accusation has consequences.
+
+**Core mechanics:**
+- **Evidence gathering** – Explore rooms, interact with clues, and solve puzzles to unlock new areas
+- **Suspicion system** – Suspicion grows dynamically as you explore. Collect more clues and it escalates faster, putting pressure on puzzle-solving
+- **NPC AI patrol** – Guards navigate the map using NavMesh waypoints. When suspicion reaches max, nearby NPCs actively search for the player. Getting caught sends you back to the main reunion area
+- **Inventory & accusation** – Collected clues are stored with descriptions. At the end, review your evidence and submit a final accusation with three possible endings
+
+---
+
+## Puzzles
+
+Five puzzle types of varying difficulty, all fully implemented:
+
+| Puzzle | Description |
+|--------|-------------|
+| Sliding Jigsaw | Randomized tile shuffle — difficulty varies by generation |
+| Pipe Connect | Connect tubes from start to end; resettable |
+| Pill Sort | Drag-and-drop sorting into correct containers |
+| Code Unlock | Numeric code entry |
+| Color Flow | Connect color pairs without overlapping paths |
+
+Completed puzzles highlight green. Puzzles are distributed across acts, with suspicion acting as the primary difficulty multiplier.
+
+---
+
+## AI & Technical Features
+
+- **NavMesh pathfinding** – NPCs navigate a multi-room environment with door-aware pathing; locked rooms block NPC access
+- **Suspicion-driven behavior** – NPCs transition from passive patrol to active search based on a global suspicion value that scales with player progress
+- **Stationary NPCs** – Secondary characters with dialogue interaction
+- **Detection radius** – Configurable per-NPC texture radius and speed settings via Unity Inspector
+- **Multi-act progression** – Three acts with increasing suspicion growth rate and puzzle complexity
+- **Three endings** – Outcome determined by accusation accuracy
+
+---
+
+## UI & Systems
+
+- Main menu with settings (volume control)
+- In-game HUD: suspicion meter, clue counter
+- Interactive tutorial and on-screen controls
+- Pause menu (resume, settings, quit)
+- In-game map (M key)
+- Inventory viewer (B key) with expandable clue descriptions
+- Accusation scene with clue review panel
+- Consistent resolution across all scenes
+
+---
+
+## Built With
+
+- **Unity** (2D)
+- **C#**
+- **Unity NavMesh** for NPC pathfinding
+- **Unity Asset Store** (character sprites, tilesets, UI, audio)
+- **Jira** for sprint tracking and task management
+- **Git / GitHub** for version control
+
+---
+
+## Team
+
+Developed by a team of students for CAP4053 – AI for Game Programming, UCF Spring 2025.
+
+---
+
+## Running the Game
+
+Run the included `.exe` — no additional setup required.
+
+An answer key with screenshots is available [here](https://docs.google.com/document/d/1a1MK4QIwGZOvckUrP1hgLzlRmDAeJZEozfStLeu8d58/edit?usp=sharing) if you get stuck.
+
+### Known Bugs
+- Jigsaw puzzle: placing a correct piece over an incorrect piece locks both — reset the puzzle to recover
+- Color Flow: allows overlapping lines in some cases, which may let you complete it incorrectly
